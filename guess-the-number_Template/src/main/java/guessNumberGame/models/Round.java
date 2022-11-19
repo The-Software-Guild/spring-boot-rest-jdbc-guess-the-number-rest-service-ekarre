@@ -1,6 +1,5 @@
 package guessNumberGame.models;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -11,45 +10,20 @@ public class Round {
     String guess;
     String result;
 
-    public int getId() {
-        return round_id;
-    }
+    public int getId() { return round_id; }
+    public void setId(int round_id) { this.round_id = round_id; }
 
-    public void setId(int round_id) {
-        this.round_id = round_id;
-    }
+    public int getGameId() { return game_id; }
+    public void setGameId(int game_id) { this.game_id = game_id; }
 
-    public int getGameId() {
-        return game_id;
-    }
+    public Timestamp getTimeStamp() { return guess_time; }
+    public void setTimeStamp(Timestamp timeStamp) { this.guess_time = timeStamp; }
 
-    public void setGameId(int game_id) {
-        this.game_id = game_id;
-    }
+    public String getGuess() { return guess; }
+    public void setGuess(String guess) { this.guess = guess; }
 
-    public Timestamp getTimeStamp() {
-        return guess_time;
-    }
-
-    public void setTimeStamp(Timestamp timeStamp) {
-        this.guess_time = timeStamp;
-    }
-
-    public String getGuess() {
-        return guess;
-    }
-
-    public void setGuess(String guess) {
-        this.guess = guess;
-    }
-
-    public String getGuessResult() {
-        return result;
-    }
-
-    public void setGuessResult(String guessResult) {
-        this.result = guessResult;
-    }
+    public String getGuessResult() { return result; }
+    public void setGuessResult(String guessResult) { this.result = guessResult; }
 
     @Override
     public boolean equals(Object o) {
@@ -60,7 +34,5 @@ public class Round {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(round_id, game_id, guess_time, guess, result);
-    }
+    public int hashCode() { return Objects.hash(round_id, game_id, guess_time, guess, result); }
 }

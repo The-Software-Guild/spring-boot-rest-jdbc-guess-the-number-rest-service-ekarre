@@ -1,14 +1,11 @@
 package guessNumberGame.Service;
 
 import guessNumberGame.data.GameDao;
-import guessNumberGame.data.GameDatabaseDao;
 import guessNumberGame.models.Game;
 import guessNumberGame.models.Round;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -20,10 +17,12 @@ public class GameService {
 
         StringBuilder answer = new StringBuilder();
 
+        //for integers starting at place 0 and until less than 4, create a random integer
+        //with the upper bound of 10 (non-inclusive so 9)
         for (int i = 0; i < 4; i++) {
             int num = rand.nextInt(10);
+            //append means add
             answer.append(num);
-
         }
         game.setAnswer(answer.toString());
         game.setIsFinished(false);

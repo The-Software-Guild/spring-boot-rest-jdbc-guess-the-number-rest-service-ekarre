@@ -1,6 +1,5 @@
 package guessNumberGame.models;
 
-
 import java.util.Objects;
 
 public class Game {
@@ -8,29 +7,14 @@ public class Game {
     private String answer;
     private boolean isFinished;
 
-    public int getGameId() {
-        return game_id;
-    }
+    public int getGameId() { return game_id; }
+    public void setGameId(int game_id) { this.game_id = game_id; }
 
-    public void setGameId(int game_id) {
-        this.game_id = game_id;
-    }
+    public String getAnswer() { return this.answer; }
+    public void setAnswer(String answer) { this.answer = answer; }
 
-    public String getAnswer() {
-        return this.answer;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
-
-    public boolean getIsFinished() {
-        return isFinished;
-    }
-
-    public void setIsFinished(boolean finished) {
-        this.isFinished = finished;
-    }
+    public boolean getIsFinished() { return isFinished; }
+    public void setIsFinished(boolean finished) { this.isFinished = finished; }
 
     public String toString(){
         String game_id = String.valueOf(this.getGameId());

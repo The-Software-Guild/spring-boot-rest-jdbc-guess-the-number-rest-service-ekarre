@@ -18,9 +18,7 @@ public class GameDatabaseDao implements GameDao {
      private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public GameDatabaseDao(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+    public GameDatabaseDao(JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
 
     @Override
     public Game add(Game game) {

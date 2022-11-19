@@ -25,9 +25,7 @@ public class GameInMemoryDao implements GameDao {
     }
 
     @Override
-    public List<Game> getAll() {
-        return new ArrayList<>(games);
-    }
+    public List<Game> getAll() { return new ArrayList<>(games); }
 
     @Override
     public Game findById(int id) {

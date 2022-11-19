@@ -1,7 +1,6 @@
 package guessNumberGame.data;
 
 import guessNumberGame.models.Round;
-
 import java.util.List;
 public interface RoundDao {
     Round add(Round round);

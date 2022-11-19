@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 public class GameController {
 
-
     private final GameDao gameDao;
     private final RoundDao roundDao;
 
@@ -36,7 +35,6 @@ public class GameController {
         
     }
 
-
     @PostMapping("/guess")
     @ResponseStatus(HttpStatus.CREATED)
     public Round guessNumber(@RequestBody Round body) {
@@ -54,7 +52,8 @@ public class GameController {
     }
 
     @GetMapping("rounds/{gameId}")
-    //implement
-    {}
+    public Round getRoundById() {
+        //implement
+    }
 
 }

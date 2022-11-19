@@ -18,9 +18,7 @@ public class RoundDatabaseDao implements  RoundDao{
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public RoundDatabaseDao(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+    public RoundDatabaseDao(JdbcTemplate jdbcTemplate) { this.jdbcTemplate = jdbcTemplate; }
 
     @Override
     public Round add(Round round) {
