@@ -48,24 +48,31 @@ public class RoundDatabaseDao implements  RoundDao{
 
     @Override
     public List<Round> getAll() {
-         //implement
+        final String sql = "SELECT round_id, game_id, guess_time, guess, result FROM round;";
+        return jdbcTemplate.query(sql, new RoundMapper());
     }
 
     @Override
     public List<Round> getAllOfGame(int game_id) {
-      //implement
+    //figure out what should be in this statement
+      final String sql = "";
+      return jdbcTemplate.query(sql, new RoundMapper(), game_id);
     }
 
     @Override
     public Round findById(int round_id) {
-      //implement
+    //fill in correct name of columns and name of table
+      final String sql = "SELECT round_id, game_id, guess_time, guess, result " + "FROM round WHERE round_id = ?;";
+      return jdbcTemplate.queryForObject(sql, new RoundMapper(), round_id);
     }
 
     @Override public boolean update(Round round) { return false; }
+    //figure out why this is just "return false"
 
     @Override
     public boolean deleteById(int round_id) {
-      //implement
+      final String sql = "DELETE FROM round WHERE round_id = ?;";
+      return jdbcTemplate.update(sql, round_id) > 0;
     }
 
     private static final class RoundMapper implements RowMapper<Round> {

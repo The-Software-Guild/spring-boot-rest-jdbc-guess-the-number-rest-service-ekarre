@@ -45,23 +45,31 @@ public class GameDatabaseDao implements GameDao {
 
     @Override
     public List<Game> getAll() {
-       //implement
+       final String sql = "SELECT game_id, answer, isFinished FROM game;";
+       return jdbcTemplate.query(sql, new GameMapper());
     }
 
 
     @Override
     public Game findById(int game_id) {
-       //implement
+       final String sql = "SELECT game_id, answer, isFinished " + "FROM game WHERE game_id = ?;";
+       return jdbcTemplate.queryForObject(sql, new GameMapper(), game_id);
     }
 
     @Override
     public boolean update(Game game) {
-         //implement
+         final String sql = "UPDATE game SET "
+                 + "answer = ?, "
+                 + "isFinished = ? "
+                 + "WHERE game_id = ?;";
+
+         return jdbcTemplate.update(sql, game.getAnswer(), game.getIsFinished(), game.getGameId()) > 0;
     }
 
     @Override
     public boolean deleteById(int game_id) {
-       //implement
+       final String sql = "DELETE FROM game WHERE game_id = ?;";
+       return jdbcTemplate.update(sql, game_id) > 0;
     }
 
     private static final class GameMapper implements RowMapper<Game> {

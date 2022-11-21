@@ -86,4 +86,20 @@ public class RoundDatabaseDaoTest extends TestCase {
          //implement
     }
 
+    @Test
+    public void testDeleteByIdAndFindById () {
+        GameService gameService = new GameService();
+        Game game = gameService.newGame();
+        gameDao.add(game);
+
+        Round round = new Round();
+        round.setGuess("1111");
+        round.setGameId(game.getGameId());
+        roundDao.add(round);
+
+        Round fromDao = roundDao.findById(round.getId());
+        assertEquals(round.getId(), fromDao.getId());
+
+        roundDao.deleteById(round.getId());
+    }
 }

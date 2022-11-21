@@ -38,7 +38,6 @@ public class GameDatabaseDaoTest extends TestCase {
         }
     }
 
-
     @Test
     public void testAddGetGames() {
         // adds new game using dao
@@ -52,9 +51,20 @@ public class GameDatabaseDaoTest extends TestCase {
 
     @Test
     public void testGetAll() {
-        //implement
-    }
+        GameService gameService1 = new GameService();
+        Game game1 = gameService1.newGame();
+        gameDao.add(game1);
 
+        GameService gameService2 = new GameService();
+        Game game2 = gameService2.newGame();
+        gameDao.add(game2);
+
+        List<Game> games = gameDao.getAll();
+
+        assertEquals(games.size(), 2);
+        assertTrue(games.contains(game1));
+        assertTrue(games.contains(game2));
+    }
 
     @Test
     public void testUpdate() {
@@ -68,7 +78,15 @@ public class GameDatabaseDaoTest extends TestCase {
     }
 
     @Test
-    public void testDeleteById() {
-         //implement
+    public void testDeleteByIdAndFindById() {
+        GameService gameService = new GameService();
+        Game game = gameService.newGame();
+        gameDao.add(game);
+
+        Game fromDao = gameDao.findById(game.getGameId());
+        assertEquals(game.getGameId(), fromDao.getGameId());
+
+        gameDao.deleteById(game.getGameId());
     }
+
 }

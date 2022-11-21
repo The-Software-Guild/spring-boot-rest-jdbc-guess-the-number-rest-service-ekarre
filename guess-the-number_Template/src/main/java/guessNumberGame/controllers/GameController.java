@@ -24,36 +24,32 @@ public class GameController {
        this.roundDao = roundDao;
     }
 
-    @PostMapping("/begin")
+    /*@PostMapping("/begin")
     @ResponseStatus(HttpStatus.CREATED)
     public Game create() {
-         //implement create gameService object and game object
+         implement create gameService object and game object
         
-        //add to database
+        add to database
        
-        //getGame will hide answer before returning it to the user
+        getGame will hide answer before returning it to the user
         
-    }
+    }*/
 
-    @PostMapping("/guess")
+    /*@PostMapping("/guess")
     @ResponseStatus(HttpStatus.CREATED)
     public Round guessNumber(@RequestBody Round body) {
-       //implement
     }
 
     @GetMapping("/game")
     public List<Game> all() {
-      //implement
     }
 
     @GetMapping("game/{id}")
     public Game getGameById(@PathVariable int id) {
-        //implement
     }
 
     @GetMapping("rounds/{gameId}")
     public Round getRoundById() {
-        //implement
-    }
+    }*/
 
 }
