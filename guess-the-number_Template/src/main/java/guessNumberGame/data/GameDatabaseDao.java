@@ -49,7 +49,6 @@ public class GameDatabaseDao implements GameDao {
        return jdbcTemplate.query(sql, new GameMapper());
     }
 
-
     @Override
     public Game findById(int game_id) {
        final String sql = "SELECT game_id, answer, isFinished " + "FROM game WHERE game_id = ?;";
@@ -58,11 +57,12 @@ public class GameDatabaseDao implements GameDao {
 
     @Override
     public boolean update(Game game) {
+        //create a sql string to update the items in the game table
+        //don't include game_id in update statement because we don't need to update it
          final String sql = "UPDATE game SET "
                  + "answer = ?, "
                  + "isFinished = ? "
                  + "WHERE game_id = ?;";
-
          return jdbcTemplate.update(sql, game.getAnswer(), game.getIsFinished(), game.getGameId()) > 0;
     }
 

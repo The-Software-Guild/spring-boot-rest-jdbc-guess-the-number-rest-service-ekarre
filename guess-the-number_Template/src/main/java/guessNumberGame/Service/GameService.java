@@ -37,12 +37,13 @@ public class GameService {
         return game;
     }
 
-    public void getAllGames(List<Game> games) {
+    public List<Game> getAllGames(List<Game> games) {
         for (Game game : games) {
             if (!game.getIsFinished()) {
                 game.setAnswer("****");
             }
         }
+        return games;
     }
 
     public Round guessNumber(Game game, String guess, GameDao gameDao) {

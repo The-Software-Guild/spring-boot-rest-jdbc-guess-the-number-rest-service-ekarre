@@ -17,6 +17,7 @@ public class GameController {
 
     private final GameDao gameDao;
     private final RoundDao roundDao;
+    private final GameService service = new GameService();
 
 
     public GameController(GameDao gameDao, RoundDao roundDao) {
@@ -24,32 +25,37 @@ public class GameController {
        this.roundDao = roundDao;
     }
 
-    /*@PostMapping("/begin")
+    @PostMapping("/begin")
     @ResponseStatus(HttpStatus.CREATED)
-    public Game create() {
-         implement create gameService object and game object
-        
-        add to database
-       
-        getGame will hide answer before returning it to the user
-        
-    }*/
+    public Game create(@RequestBody Game game) {
 
-    /*@PostMapping("/guess")
+        //add to database
+        gameDao.add(game);
+
+        //getGames will hide answer before returning it to the user
+        service.getGames(game);
+
+        return game;
+    }
+
+    @PostMapping("/guess")
     @ResponseStatus(HttpStatus.CREATED)
     public Round guessNumber(@RequestBody Round body) {
+        return service.guessNumber(gameDao.findById(body.getGameId()), body.getGuess(), gameDao);
     }
 
     @GetMapping("/game")
     public List<Game> all() {
+        return gameDao.getAll();
     }
 
     @GetMapping("game/{id}")
     public Game getGameById(@PathVariable int id) {
+        return gameDao.findById(id);
     }
 
     @GetMapping("rounds/{gameId}")
-    public Round getRoundById() {
-    }*/
-
+    public List<Round> getAllOfGame(@PathVariable int gameId) {
+        return roundDao.getAllOfGame(gameId);
+    }
 }

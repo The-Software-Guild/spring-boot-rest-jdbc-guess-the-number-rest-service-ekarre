@@ -1,8 +1,5 @@
 package guessNumberGame.data;
 
-
-import guessNumberGame.data.GameDao;
-import guessNumberGame.data.RoundDao;
 import junit.framework.TestCase;
 import guessNumberGame.Service.GameService;
 import guessNumberGame.TestApplicationConfiguration;
@@ -83,7 +80,24 @@ public class RoundDatabaseDaoTest extends TestCase {
 
     @Test
     public void testGetAllOfGame() {
-         //implement
+        GameService gameService = new GameService();
+        Game game = gameService.newGame();
+        gameDao.add(game);
+
+        Round round = new Round();
+        round.setGuess("1111");
+        round.setGameId(game.getGameId());
+        roundDao.add(round);
+
+        Round round2 = new Round();
+        round2.setGuess("2222");
+        round2.setGameId(game.getGameId());
+        roundDao.add(round2);
+
+        List<Round> rounds = roundDao.getAllOfGame(game.getGameId());
+        assertEquals(2, rounds.size());
+        assertEquals("1111", rounds.get(0).getGuess());
+        assertEquals("2222", rounds.get(1).getGuess());
     }
 
     @Test
@@ -101,5 +115,23 @@ public class RoundDatabaseDaoTest extends TestCase {
         assertEquals(round.getId(), fromDao.getId());
 
         roundDao.deleteById(round.getId());
+    }
+
+    @Test
+    public void testUpdateRound() {
+        GameService gameService = new GameService();
+        Game game = gameService.newGame();
+        gameDao.add(game);
+
+        Round round = new Round();
+        round.setGuess("1111");
+        round.setGameId(game.getGameId());
+        roundDao.add(round);
+
+        round.setGuess("2222");
+        roundDao.update(round);
+
+        Round roundUpdated = roundDao.findById(round.getId());
+        assertEquals(roundUpdated.getGuess(), "2222");
     }
 }

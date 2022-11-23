@@ -1,6 +1,5 @@
 package guessNumberGame.data;
 
-import guessNumberGame.models.Game;
 import guessNumberGame.models.Round;
 
 import java.sql.*;
@@ -48,26 +47,33 @@ public class RoundDatabaseDao implements  RoundDao{
 
     @Override
     public List<Round> getAll() {
-        final String sql = "SELECT round_id, game_id, guess_time, guess, result FROM round;";
+        final String sql = "SELECT round_id, game_id, guess_time, guess, result FROM round ORDER BY round_id;";
         return jdbcTemplate.query(sql, new RoundMapper());
     }
 
     @Override
     public List<Round> getAllOfGame(int game_id) {
-    //figure out what should be in this statement
-      final String sql = "";
+      final String sql = "SELECT round_id, game_id, guess_time, guess, result FROM round WHERE game_id = ? ORDER BY round_id;";
       return jdbcTemplate.query(sql, new RoundMapper(), game_id);
     }
 
     @Override
     public Round findById(int round_id) {
-    //fill in correct name of columns and name of table
       final String sql = "SELECT round_id, game_id, guess_time, guess, result " + "FROM round WHERE round_id = ?;";
       return jdbcTemplate.queryForObject(sql, new RoundMapper(), round_id);
     }
 
-    @Override public boolean update(Round round) { return false; }
-    //figure out why this is just "return false"
+    @Override public boolean update(Round round) {
+        //create a sql string to update the items in the round table
+        //don't include round_id in update statement because we don't need to update it
+        final String sql = "UPDATE round SET "
+                + "game_id = ?, "
+                + "guess_time = ?, "
+                + "guess = ?, "
+                + "result = ? "
+                + "WHERE round_id = ?;";
+        return jdbcTemplate.update(sql, round.getGameId(), round.getTimeStamp(), round.getGuess(), round.getGuessResult(), round.getId()) > 0;
+    }
 
     @Override
     public boolean deleteById(int round_id) {

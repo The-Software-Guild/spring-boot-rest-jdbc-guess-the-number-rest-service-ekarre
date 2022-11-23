@@ -1,6 +1,5 @@
 package guessNumberGame.data;
 
-import guessNumberGame.data.GameDao;
 import junit.framework.TestCase;
 import guessNumberGame.Service.GameService;
 import guessNumberGame.TestApplicationConfiguration;
